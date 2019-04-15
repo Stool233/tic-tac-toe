@@ -4,6 +4,7 @@ import com.mongodb.DB;
 import com.mongodb.MongoClient;
 import org.jongo.Jongo;
 import org.jongo.MongoCollection;
+import org.stool.tdd.tictactoe.mongo.TicTacToeBean;
 
 public class TicTacToeCollection {
 
@@ -17,4 +18,23 @@ public class TicTacToeCollection {
         mongoCollection = new Jongo(db).getCollection("game");
     }
 
+    public boolean saveMove(TicTacToeBean bean) {
+
+        try {
+            getMongoCollection().save(bean);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+
+    }
+
+    public boolean drop() {
+        try {
+            getMongoCollection().drop();
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
 }
